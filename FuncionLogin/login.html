@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login_style.css">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login">
+            <h2>Iniciar Sesión</h2>
+            <form action="procesar_login.php" method="POST" id="loginForm">
+                <input type="text" name="usuario" placeholder="Usuario" class="usuario" id="usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" class="password" id="password" required>
+                <input type="submit" class="submit" value="INICIAR SESIÓN">
+            </form>
+            <div class="forgot-password">
+                <p>¿Olvidaste tu contraseña?</p>
+                <form action= "/InterfazLogin/FuncionLogin/enviarCorreo.php" method="POST">
+                    <input type="email" name="email" placeholder="Introduce tu correo" class="email" id="email">
+                    <input type="submit" class="reset" value="Restablecer Contraseña">
+                </form>
+            </div>
+            <div class="register-option">
+                <p>Aún no tienes una cuenta? <a href="/InterfazLogin/FuncionRegistro/registro.html">Regístrate aquí</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Validación básica del formulario antes de enviarlo
+        document.getElementById("loginForm").onsubmit = function() {
+            let usuario = document.getElementById("usuario").value;
+            let password = document.getElementById("password").value;
+
+            if (usuario === "" || password === "") {
+                alert("Todos los campos son obligatorios.");
+                return false;
+            }
+            return true;
+        };
+    </script>
+</body>
+</html>
