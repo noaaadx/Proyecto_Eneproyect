@@ -13,10 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Todos los campos son obligatorios.");
     }
 
-    $db_host = "localhost";
-    $db_nombre = "login_bd"; // Asegúrate de que el nombre de la base de datos sea correcto
-    $db_usuario = "root";
-    $db_contra = "SEB23NOV2023_"; // Contraseña de tu base de datos
+    $db_host = "";
+    $db_nombre = ""; // Asegúrate de que el nombre de la base de datos sea correcto
+    $db_usuario = "";
+    $db_contra = ""; // Contraseña de tu base de datos
 
     // Crear una conexión con MySQLi
     $conexion = new mysqli($db_host, $db_usuario, $db_contra, $db_nombre);
