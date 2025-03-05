@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Datos de la base de datos
-    $db_host = "localhost";
-    $db_nombre = "login_bd";
-    $db_usuario = "root";
-    $db_contra = "SEB23NOV2023_";
+    $db_host = "";
+    $db_nombre = "";
+    $db_usuario = "";
+    $db_contra = "";
 
     // Crear conexión a la base de datos
     $conexion = new mysqli($db_host, $db_usuario, $db_contra, $db_nombre);
