@@ -1,114 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="registro_style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/InterfazLogin/FuncionRegistro/registro_style.css">
     <title>Registro</title>
 </head>
+
 <body>
     <div class="container">
         <div class="register-container">
             <div class="register">
-                <h2>Registrarse</h2>
-                <form action="/InterfazLogin/FuncionRegistro/procesar_registro.php" method="POST" onsubmit="return validarFormulario(event)">
+                <div class="header">
+                    <!--<a href="https://eneproyect.com/intranet-eneproyect/" class="volver-link">← Volver</a>-->
+                    <h2>Registrarse</h2>
+                </div>
+                <form id="registroForm" action="/InterfazLogin/FuncionRegistro/procesar_registro.php" method="POST">
                     <input type="text" name="nombre" placeholder="Nombre" class="nombre" required>
                     <input type="text" name="apellido" placeholder="Apellido" class="apellido" required>
                     <input type="email" name="correo" placeholder="Correo" class="correo" required>
                     <input type="text" name="usuario" placeholder="Usuario" class="usuario" required>
                     
                     <div class="password-container">
-                        <input type="password" id="password" name="pass" placeholder="Contraseña" class="pass" required>
-                        <i id="togglePass" class="fas fa-eye" onclick="togglePassword('password', 'togglePass')"></i>
-                        <div class="help-icon" title="Ayuda">?</div>
-                        <div class="tooltip">
-                          La contraseña debe tener:
-                          <ul>
-                            <li>Al menos 10 caracteres.</li>
-                            <li>Una letra mayúscula.</li>
-                            <li>Una letra minúscula.</li>
-                            <li>Un número.</li>
-                            <li>Un carácter especial.</li>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                    
-                    <div class="password-container">
-                        <input type="password" id="confirmPassword" name="repass" placeholder="Confirmar Contraseña" class="repass" required>
-                        <i id="toggleRePass" class="fas fa-eye" onclick="togglePassword('confirmPassword', 'toggleRePass')"></i>
+                        <input type="password" id="password" name="pass" placeholder="Contraseña" required>
+                        <i id="togglePass" class="fas fa-eye-slash"></i>
+                        <span id="passwordError" class="error-message"></span> <!-- Mensaje de error -->
                     </div>
                     
-                    <input type="submit" class="submit" value="REGISTRARSE">
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" name="repass" placeholder="Confirmar Contraseña" required>
+                        <i id="toggleRePass" class="fas fa-eye-slash"></i>
+                        <span id="confirmPasswordError" class="error-message"></span> <!-- Mensaje de error -->
+                    </div>
+
+                    <div class="container">
+                        <button type="submit" class="btn btn-success">REGISTRARSE</button>
+                        <button type="button" class="btn btn-danger" id="btn_eliminar">LIMPIAR</button>
+                        <button type="button" class="btn btn-primary" id="btn_volver" onclick="window.location.href='https://eneproyect.com/intranet-eneproyect/'">VOLVER</button>                        
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <script>
-        function togglePassword(inputId, iconId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            if (input.type === "password") {
-                input.type = "text";
-                icon.className = "fas fa-eye-slash";
-            } else {
-                input.type = "password";
-                icon.className = "fas fa-eye";
-            }
-        }
-
-        function mostrarAyuda(tooltipId) {
-            const tooltip = document.getElementById(tooltipId);
-            tooltip.style.display = "block";
-        }
-
-        function ocultarAyuda(tooltipId) {
-            const tooltip = document.getElementById(tooltipId);
-            tooltip.style.display = "none";
-        }
-
-        function validarFormulario(event) {
-            event.preventDefault();
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-
-            const longitudMinima = /.{10,}/;
-            const tieneMayuscula = /[A-Z]/;
-            const tieneMinuscula = /[a-z]/;
-            const tieneNumero = /[0-9]/;
-            const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/;
-
-            if (!longitudMinima.test(password)) {
-                alert("La contraseña debe tener al menos 10 caracteres.");
-                return false;
-            }
-            if (!tieneMayuscula.test(password)) {
-                alert("La contraseña debe contener al menos una letra mayúscula.");
-                return false;
-            }
-            if (!tieneMinuscula.test(password)) {
-                alert("La contraseña debe contener al menos una letra minúscula.");
-                return false;
-            }
-            if (!tieneNumero.test(password)) {
-                alert("La contraseña debe contener al menos un número.");
-                return false;
-            }
-            if (!tieneCaracterEspecial.test(password)) {
-                alert("La contraseña debe contener al menos un carácter especial.");
-                return false;
-            }
-            if (password !== confirmPassword) {
-                alert("Las contraseñas no coinciden.");
-                return false;
-            }
-            event.target.submit();
-        }
-    </script>
+    <script src="/InterfazLogin/FuncionRegistro/registro.js"></script>
 </body>
 </html>
+
+
 
