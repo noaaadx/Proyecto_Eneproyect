@@ -1,21 +1,7 @@
 <?php
 
 // Configuración de la conexión a la base de datos
-
-    $servidor = "";
-    $usuario = "";
-    $contrasena = ""; // Asegúrate de que esta es la contraseña correcta
-    $baseDatos = "";
-
-//require '../conexion.php';   // Si está en una carpeta llamada "config"
-
-// Conectar a la base de datos
-$conn = new mysqli($servidor, $usuario, $contrasena, $baseDatos);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
-}
+require '../conexion.php';   // Si está en una carpeta llamada "config"
 
 // Verificar si la solicitud es POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -53,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultado = $stmt->get_result();
 
     if ($resultado->num_rows > 0) {
-        echo "Error: El nombre de usuario ya está en uso.";
+        header("Location: /InterfazLogin/FuncionRegistro/registro.html?error=usuario_existente");
         exit;
     }
     
