@@ -1,5 +1,21 @@
 $(document).ready(function () {
     console.log("JS cargado correctamente.");
+    // Mensajes de error
+    // Verificar si hay un parámetro de error en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    //
+    if (error === 'usuario_existente') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Usuario existente',
+            text: 'El nombre de usuario ya está en uso. Por favor, elige otro.',
+            confirmButtonText: 'Entendido'
+        }).then(() => {  // Aquí va el then() correctamente
+            window.location.href = 'registro.html';
+        });
+    }    
+    //
 
     // Función para mostrar/ocultar contraseña
     function togglePassword(inputId, iconId) {
