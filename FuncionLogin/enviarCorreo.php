@@ -26,18 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['email'])) {
         $stmt->bind_param("si", $token, $row['id']);
         $stmt->execute();
 
-        $reset_link = "https://eneproyect.com/InterfazLogin/FuncionLogin/ValidaYDirec.php?token=$token";
+        //link para local
+        $reset_link = "http://localhost:3000/InterfazLogin/FuncionLogin/RestablecerContra/procesar_reset_password.html?token=$token";
+        //link para global
+        //$reset_link = "https://eneproyect.com/InterfazLogin/FuncionLogin/ValidaYDirec.php?token=$token";
 
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host = '';
+            $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'correo_emisor';
-            $mail->Password = '';
+            $mail->Username = 'sebastiannoacjt@gmail.com';
+            $mail->Password = 'ickq exyj ocwd ygjw';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
-            $mail->setFrom('correo emisor', 'fake nombre');
+            $mail->setFrom('sebastiannoacjt@gmail.com', 'Soporte');
             $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = 'Restablece tu contraseña';
@@ -64,4 +67,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['email'])) {
 }
 $conn->close();
 ?>
+
 
